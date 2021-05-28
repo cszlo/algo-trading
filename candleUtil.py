@@ -1,13 +1,11 @@
 class candleUtil:
 
     # Returns 1 if closed up, -1 if closed down, 0 if flat
-    def upDown(candle):
-        if candle.open > candle.close:
-            return 1
-        elif  candle.open < candle.close:
-            return -1
-        else:
-            return 0
+    def closedUp(candle):
+        return True if candle.open < candle.close else False
+
+    def closedDown(candle):
+        return True if candle.open > candle.close else False
 
     # Returns True if curr is an inside bar, False if it is not
     # 

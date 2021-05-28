@@ -10,8 +10,8 @@ class Candle:
         self.low = float(data[3])
         self.close = float(data[4])
         self.vol = float(data[5])
-        self.closedUp = candleUtil.upDown(self)
-        self.closedDown = not self.closedUp
+        self.closedUp = candleUtil.closedUp(self)
+        self.closedDown = candleUtil.closedDown(self)
         self.shadow = self.high - self.low
         self.body = abs(self.open - self.close)
         self.MA = MA
