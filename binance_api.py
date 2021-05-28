@@ -37,7 +37,7 @@ def main():
     load close of each candle into CLOSE_VALUES for indicator calculations 
     '''
     for i in range(len(response)):
-        CLOSES.append(response[i][4])
+        CLOSES.append(response[i][4]) 
 
     numbers_series = pan.Series(CLOSES)
     windows = numbers_series.rolling(WINDOW)
@@ -53,16 +53,23 @@ def main():
             data.append(Candle(response[i], 0))
 
     if args.pattern == "hammer":
-        for i in range(len(data)-3):
+        for i in range(len(data)):
             if candleUtil.hammer(data[i]):
                 print(f"{args.symbol} Hammer: \t" + data[i].timestamp)
-                print(f"SMA:\t\t{data[i].MA}")
+                # print(f"SMA:\t\t{data[i].MA}")
                 print()
     elif args.pattern == "insidebar":   
-        for i in range(len(data)-4):
-            if candleUtil.isInsideBar(data[i-1], data[i]):
-                print(f"{args.symbol} InsideBar: \t" + data[i].timestamp)
-                print(f"SMA:\t\t\t{data[i].MA}")
+        for i in range(len(data)):
+            if i > 0:
+                if candleUtil.isInsideBar(data[i-1], data[i]):
+                    print(f"{args.symbol} InsideBar: \t" + data[i].timestamp)
+                    print()
+                    # print(f"SMA:\t\t\t{data[i].MA}")
+    elif args.pattern == "engulfing":   
+        for i in range(len(data)):
+            if candleUtil.bullBearEngulfing(data[i-1], data[i]):
+                print(f"{args.symbol} Engulfing: \t" + data[i].timestamp)
+                # print(f"SMA:\t\t\t{data[i].MA}")
                 print()
     elif args.pattern == None:
         for i in range(len(data)):

@@ -18,8 +18,8 @@ class Candle:
 
     def toString(data):
         print(f'{data.timestamp}')
+        print(f'\tOpen:\t{data.open}')
         print(f'\tClose:\t{data.close}')
         print(f'\tMA:\t{data.MA}')
-        print()
 
         
